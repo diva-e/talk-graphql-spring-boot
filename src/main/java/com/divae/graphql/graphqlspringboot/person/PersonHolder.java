@@ -1,5 +1,6 @@
 package com.divae.graphql.graphqlspringboot.person;
 
+import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.FluxSink;
 import reactor.core.publisher.TopicProcessor;
@@ -13,6 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+@Service
 public class PersonHolder {
 
     private Map<UUID, Person> personStorage = new ConcurrentHashMap<>();

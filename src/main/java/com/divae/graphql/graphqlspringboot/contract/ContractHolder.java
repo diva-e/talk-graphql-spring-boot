@@ -3,6 +3,7 @@ package com.divae.graphql.graphqlspringboot.contract;
 import com.divae.graphql.graphqlspringboot.person.PersonHolder;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.FluxSink;
 import reactor.core.publisher.TopicProcessor;
@@ -13,6 +14,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
+@Service
 @RequiredArgsConstructor
 public class ContractHolder {
 
