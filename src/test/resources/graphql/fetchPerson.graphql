@@ -1,0 +1,11 @@
+query FetchPerson($personId: ID) {
+    person(personId: $personId) {
+        id
+        firstName
+        lastName
+        contracts {
+            id
+            name
+        }
+    }
+}

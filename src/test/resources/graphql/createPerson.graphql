@@ -1,0 +1,22 @@
+mutation CreatePerson {
+    changePerson(person:  {
+
+        gender: MALE
+
+        firstName : "Hans"
+        lastName : "Dampf"
+
+        street: "Rathausplatz"
+        houseNumber: 123
+        zipCode: "76131"
+        city: "Karlsruhe"
+
+        email: "hans.dampf@example.com"
+        telephone: "+49123456789"
+
+        sendNewsletter: true
+
+    }) {
+        id
+    }
+}

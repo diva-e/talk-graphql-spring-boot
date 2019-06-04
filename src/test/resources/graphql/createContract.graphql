@@ -1,0 +1,6 @@
+mutation CreateContract($personId: ID) {
+    addContractToPerson(personId: $personId, name: "Haftpflichtversicherung") {
+        id
+        name
+    }
+}
