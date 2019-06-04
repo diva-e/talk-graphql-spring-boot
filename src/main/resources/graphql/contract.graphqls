@@ -1,0 +1,19 @@
+type Contract {
+
+    id: ID!
+
+    name: String
+
+}
+
+extend type Mutation {
+
+    addContractToPerson(personId: ID, name: String): Contract
+
+}
+
+type Subscription {
+
+    watchContracts: Contract
+
+}

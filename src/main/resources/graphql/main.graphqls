@@ -1,5 +1,11 @@
-type Person {
+type Query {
+
 }
 
-type Query {
+type Mutation {
+
+}
+
+type Subscription {
+
 }

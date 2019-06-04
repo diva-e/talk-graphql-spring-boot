@@ -1,0 +1,69 @@
+type Person {
+
+    id: ID!
+
+    gender: Gender
+
+    firstName: String
+    lastName: String
+
+    street: String
+    houseNumber: Int
+    zipCode: String
+    city: String
+
+    email: String
+    telephone: String
+
+    sendNewsletter: Boolean
+
+    lastModified: String
+
+    contracts: [Contract!]!
+}
+
+enum Gender {
+    FEMALE,
+    MALE
+}
+
+input PersonInput {
+
+    id: ID
+
+    gender: Gender
+
+    firstName: String
+    lastName: String
+
+    street: String
+    houseNumber: Int
+    zipCode: String
+    city: String
+
+    email: String
+    telephone: String
+
+    sendNewsletter: Boolean
+
+}
+
+extend type Query {
+
+    persons: [Person!]!
+
+    person(personId: ID): Person
+
+}
+
+extend type Mutation {
+
+    changePerson(person: PersonInput): Person!
+
+}
+
+extend type Subscription {
+
+    watchPersons: Person
+
+}
