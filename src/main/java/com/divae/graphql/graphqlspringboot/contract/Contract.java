@@ -12,4 +12,5 @@ public class Contract {
     private final UUID id;
 
     private String name;
+
 }

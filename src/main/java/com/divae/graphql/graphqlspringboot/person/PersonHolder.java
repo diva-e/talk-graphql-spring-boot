@@ -1,6 +1,6 @@
 package com.divae.graphql.graphqlspringboot.person;
 
-import org.reactivestreams.Publisher;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.FluxSink;
 import reactor.core.publisher.TopicProcessor;
 
@@ -43,6 +43,8 @@ public class PersonHolder {
             throw new IllegalArgumentException("Person with id " + source.getId() + " does not exist");
         }
 
+        transfer(source::getGender, target::setGender);
+
         transfer(source::getFirstName, target::setFirstName);
         transfer(source::getLastName, target::setLastName);
 
@@ -54,15 +56,28 @@ public class PersonHolder {
         transfer(source::getEmail, target::setEmail);
         transfer(source::getTelephone, target::setTelephone);
 
+        transfer(source::isSendNewsletter, target::setSendNewsletter);
+
         target.setLastModified(Instant.now());
 
-        sink.next(target);
+        notifyPersonChanged(target);
 
         return target;
     }
 
-    public Publisher<Person> watchPersons() {
+    public Flux<Person> watchPersons() {
         return topic;
+    }
+
+    public void notifyPersonChanged(UUID personId) {
+        Person target = getPerson(personId);
+        notifyPersonChanged(target);
+    }
+
+    public void notifyPersonChanged(Person person) {
+        if (null != person) {
+            sink.next(person);
+        }
     }
 
     private <T> void transfer(Supplier<T> getter, Consumer<T> setter) {
