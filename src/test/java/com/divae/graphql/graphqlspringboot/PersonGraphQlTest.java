@@ -27,7 +27,7 @@ class PersonGraphQlTest {
 
         assertThat(createPersonResponse.get("$.data.changePerson.id"), not(isEmptyOrNullString()));
 
-        GraphQLResponse fetchPersonsResponse = graphQLTestTemplate.perform("graphql/fetchPersons.graphql");
+        GraphQLResponse fetchPersonsResponse = graphQLTestTemplate.perform("graphql/fetchPersons.graphql", null);
 
         assertThat(fetchPersonsResponse.get("$.data.persons[0].firstName"), is("Hans"));
     }
