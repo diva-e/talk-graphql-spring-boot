@@ -1,0 +1,22 @@
+query Persons {
+    persons {
+        id
+        firstName
+        contracts {
+            __typename
+            ... on ContractLifeInsurance {
+                ... contractAttr
+                duration
+            }
+            ... on ContractCarInsurance {
+                ... contractAttr
+                numberPlate
+            }
+        }
+    }
+}
+
+fragment contractAttr on Contract {
+    id
+    name
+}

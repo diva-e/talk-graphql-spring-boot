@@ -1,16 +1,11 @@
 package com.divae.graphql.graphqlspringboot.contract;
 
-import lombok.Builder;
-import lombok.Data;
-
 import java.util.UUID;
 
-@Builder
-@Data
-public class Contract {
+public interface Contract {
 
-    private final UUID id;
+    UUID getId();
 
-    private String name;
+    String getName();
 
 }

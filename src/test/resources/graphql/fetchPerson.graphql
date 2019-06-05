@@ -6,6 +6,9 @@ query FetchPerson($personId: ID) {
         contracts {
             id
             name
+            ... on ContractCarInsurance{
+                numberPlate
+            }
         }
     }
 }

@@ -1,0 +1,6 @@
+mutation CreateContractCarInsurance($name: String, $numberPlate: String) {
+    createContractCarInsurance(name: $name, numberPlate: $numberPlate) {
+        id
+        name
+    }
+}

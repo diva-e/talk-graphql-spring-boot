@@ -1,0 +1,3 @@
+mutation AssignContractToPerson($personId: ID!, $contractId: ID!) {
+    assignContractToPerson(personId: $personId, contractId: $contractId)
+}

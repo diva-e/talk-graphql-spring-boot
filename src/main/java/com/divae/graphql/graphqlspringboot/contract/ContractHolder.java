@@ -32,21 +32,46 @@ public class ContractHolder {
     }
 
     public Contract createContract(@NonNull String name) {
-        Contract target = Contract.builder()
-                .id(UUID.randomUUID())
-                .name(name)
-                .build();
-
-        contractStorage.put(target.getId(), target);
-
-        sink.next(target);
-
-        return target;
+        throw new RuntimeException("method deprecated");
     }
 
-    public void addContractToPerson(@NonNull UUID contractId, @NonNull UUID personId) {
+    public ContractLifeInsurance createContractLifeInsurance(String name, Integer duration) {
+        ContractLifeInsurance lifeInsurance = ContractLifeInsurance.builder()
+                .id(UUID.randomUUID())
+                .name(name)
+                .duration(duration)
+                .build();
+
+        contractStorage.put(lifeInsurance.getId(), lifeInsurance);
+
+        sink.next(lifeInsurance);
+
+        return lifeInsurance;
+    }
+
+    public ContractCarInsurance createContractCarInsurance(String name, String numberPlate) {
+        ContractCarInsurance carInsurance = ContractCarInsurance.builder()
+                .id(UUID.randomUUID())
+                .name(name)
+                .numberPlate(numberPlate)
+                .build();
+
+        contractStorage.put(carInsurance.getId(), carInsurance);
+
+        sink.next(carInsurance);
+
+        return carInsurance;
+    }
+
+    public Boolean addContractToPerson(@NonNull UUID contractId, @NonNull UUID personId) {
+        if (contractStorage.get(contractId) == null) {
+            return Boolean.FALSE;
+        }
+
         contractIdToContractHolderIdStorage.put(contractId, personId);
         personHolder.notifyPersonChanged(personId);
+
+        return Boolean.TRUE;
     }
 
     public List<Contract> getContractsForPerson(UUID personId) {

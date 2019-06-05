@@ -1,7 +1,9 @@
 package com.divae.graphql.graphqlspringboot.demo;
 
 import com.divae.graphql.graphqlspringboot.contract.Contract;
+import com.divae.graphql.graphqlspringboot.contract.ContractCarInsurance;
 import com.divae.graphql.graphqlspringboot.contract.ContractHolder;
+import com.divae.graphql.graphqlspringboot.contract.ContractLifeInsurance;
 import com.divae.graphql.graphqlspringboot.person.Person;
 import com.divae.graphql.graphqlspringboot.person.PersonHolder;
 import lombok.RequiredArgsConstructor;
@@ -29,9 +31,9 @@ public class DemoDataCreator implements InitializingBean {
                 .telephone("+49 721 92060 xxx")
                 .sendNewsletter(true)
                 .build());
-        Contract rentenversicherung = contractHolder.createContract("Rentenversicherung");
-        contractHolder.addContractToPerson(rentenversicherung.getId(), christian.getId());
-        Contract lebensversicherung = contractHolder.createContract("Lebensversicherung");
+        ContractCarInsurance autoversicherung = contractHolder.createContractCarInsurance("KFZ-Versicherung", "KA-AB 123");
+        contractHolder.addContractToPerson(autoversicherung.getId(), christian.getId());
+        ContractLifeInsurance lebensversicherung = contractHolder.createContractLifeInsurance("Lebensversicherung", 35);
         contractHolder.addContractToPerson(lebensversicherung.getId(), christian.getId());
 
         Person thorben = personHolder.updateOrCreatePerson(Person.builder()
@@ -44,7 +46,7 @@ public class DemoDataCreator implements InitializingBean {
                 .telephone("+49 92060 yyy")
                 .sendNewsletter(false)
                 .build());
-        Contract haftpflichtversicherung = contractHolder.createContract("Haftpflichtversicherung");
-        contractHolder.addContractToPerson(haftpflichtversicherung.getId(), thorben.getId());
+        lebensversicherung = contractHolder.createContractLifeInsurance("Lebensversicherung", 30);
+        contractHolder.addContractToPerson(lebensversicherung.getId(), thorben.getId());
     }
 }

@@ -1,15 +1,40 @@
-type Contract {
+interface Contract {
+    id: ID
+    name: String
+}
 
-    id: ID!
-
+type ContractLifeInsurance implements Contract {
+    id: ID
     name: String
 
+    duration: Int
+}
+
+type ContractCarInsurance implements Contract {
+    id: ID
+    name: String
+
+    numberPlate: String
 }
 
 extend type Mutation {
 
-    addContractToPerson(personId: ID, name: String): Contract
+    createContractLifeInsurance(
+        name: String
+        duration: Int
+    ): ContractLifeInsurance!
 
+    createContractCarInsurance(
+        name: String
+        numberPlate: String
+    ): ContractCarInsurance!
+
+    assignContractToPerson(
+        personId: ID!
+        contractId: ID!
+    ): Boolean
+
+    addContractToPerson(personId: ID, name: String): Contract @deprecated(reason: "Use assignContractToPerson instead")
 }
 
 type Subscription {

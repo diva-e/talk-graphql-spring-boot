@@ -23,17 +23,36 @@ class ContractHolderTest {
     ContractHolder contractHolder;
 
     @Test
-    void createContract() {
-        Contract contract = contractHolder.createContract("a name");
+    void createContractCarInsurance() {
+        ContractCarInsurance contract = contractHolder.createContractCarInsurance("a name", "number plate");
 
         assertThat(contract, is(notNullValue()));
         assertThat(contract.getId(), is(notNullValue()));
         assertThat(contract.getName(), is("a name"));
+        assertThat(contract.getNumberPlate(), is("number plate"));
     }
 
     @Test
-    void getContract() {
-        Contract createdContract = contractHolder.createContract("a name");
+    void getContractCarInsurance() {
+        ContractCarInsurance createdContract = contractHolder.createContractCarInsurance("a name", "number plate");
+        Contract loadedContract = contractHolder.getContract(createdContract.getId());
+
+        assertThat(loadedContract, is(createdContract));
+    }
+
+    @Test
+    void createContractLifeInsurance() {
+        ContractLifeInsurance contract = contractHolder.createContractLifeInsurance("a name", 33);
+
+        assertThat(contract, is(notNullValue()));
+        assertThat(contract.getId(), is(notNullValue()));
+        assertThat(contract.getName(), is("a name"));
+        assertThat(contract.getDuration(), is(33));
+    }
+
+    @Test
+    void getContractLifeInsurance() {
+        Contract createdContract = contractHolder.createContractLifeInsurance("a name", 33);
         Contract loadedContract = contractHolder.getContract(createdContract.getId());
 
         assertThat(loadedContract, is(createdContract));
@@ -43,7 +62,7 @@ class ContractHolderTest {
     @Test
     void addAndGetContractsForPerson() {
         UUID personId = UUID.randomUUID();
-        Contract contract = contractHolder.createContract("a name");
+        Contract contract = contractHolder.createContractLifeInsurance("a name", 33);
         UUID contractId = contract.getId();
 
         contractHolder.addContractToPerson(contractId, personId);
@@ -54,7 +73,7 @@ class ContractHolderTest {
 
     @Test
     void watchContracts() {
-        Contract createdContract = contractHolder.createContract("a name");
+        Contract createdContract = contractHolder.createContractLifeInsurance("a name", 33);
 
         Contract watchedContract = contractHolder.watchContracts().blockFirst();
 
